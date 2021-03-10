@@ -20,4 +20,5 @@
 
 > :Collapse label=Members
 > 
+> [Mauricio Meza](/docs/members/mauricio-meza)
 > [NN](/docs/members/nn)
