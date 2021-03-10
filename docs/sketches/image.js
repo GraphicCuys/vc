@@ -1,17 +1,24 @@
 let img;
-let img2;
+let height =200;
+let width = 200;
 function preload() {
+  // load the image
+  // is not necessary bring the image more than once
   img = loadImage('/vc/docs/sketches/leaf.jpg');
 }
 
 function setup(){
   // Create a canvas that's at least the size of the image.
   createCanvas(512, 512);
-  image(img, 0, 0,200,200);
+  // draw the original imaga
+  image(img, 0, 0,height,width);
+  // apply negative effect
   effect(img,"negative",250,0)
+  // apply grayscale effect
   effect(img,"gray",0,250)
   
 }
+// get the negative colors function
 function negative(colors){
   let c = []
   c = colors.map((e,i)=>{
@@ -20,11 +27,13 @@ function negative(colors){
   })
   return c 
 }
+// get the grayscale color function
 function gray(colors){
-  sum = colors.slice(0,3).reduce((a, b) => a + b, 0)
+  // alternative model to more smooth gray scale
   let c = (0.3 * colors[0]) + (0.59 * colors[1]) + (0.11 * colors[2])
   return c 
 }
+// apply the effect and draw the image
 function effect(img,type,x,y){
   img.loadPixels();
   for (let i = 0; i < img.width; i++) {
@@ -38,23 +47,5 @@ function effect(img,type,x,y){
     }
   }
   img.updatePixels();
-  image(img, x, y,200,200);
-}
-
-function draw(){
-  // let imgs = createImage(200, 200);
-  
-  // img.loadPixels();
-  // let d = pixelDensity();
-  // for (let i = 0; i < d; i++) {
-  //   for (let j = 0; j < d; j++) {
-  //     // loop over
-  //     index = 4 * ((y * d + j) * width * d + (x * d + i));
-  //     pixels[index] = 0;
-  //     pixels[index+1] = 255;
-  //     pixels[index+2] = 0;
-  //     pixels[index+3] = 0;
-  //   }
-  // }
-  // img.updatePixels()
+  image(img, x, y,height,width);
 }
