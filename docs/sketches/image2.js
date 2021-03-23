@@ -29,7 +29,7 @@ function setup(){
   // Imagen en negativo
   image(negative(img4), 0, size * 3, size, size);
   // Imagen con trabformación kernel
-  image(kernel(img5, [[1, 2, 3], [1, 2, 3], [1, 2, 3]]), 0, size * 4, size, size);
+  image(kernel(img5, [[0, 0, 0], [0, 1, 0], [0, 0, 0]]), 0, size * 4, size, size);
 }
 
 // Escala de grises
@@ -39,7 +39,7 @@ function grayScale(img) {
   // Transformar pixeles
   for (let i = 0; i < img.width; i++) {
     for (let j = 0; j < img.height; j++) {
-      colors = img.get(i,j);  
+      let colors = img.get(i,j);  
       let grayColor = (colors[0] + colors[1] + colors[2]) / 3;
       colors[0] = grayColor;
       colors[1] = grayColor;
@@ -60,7 +60,7 @@ function optimalGrayScale(img) {
   // Transformar pixeles
   for (let i = 0; i < img.width; i++) {
     for (let j = 0; j < img.height; j++) {
-      colors = img.get(i,j);  
+      let colors = img.get(i,j);  
       colors = 0.299 * colors[0] + 0.587 * colors[1] + 0.114 * colors[2];
       img.set(i, j, colors);
     }
@@ -78,7 +78,7 @@ function negative(img) {
   // Transformar pixeles
   for (let i = 0; i < img.width; i++) {
     for (let j = 0; j < img.height; j++) {
-      colors = img.get(i,j);  
+      let colors = img.get(i,j);  
       colors[0] = (255 - colors[0]);
       colors[1] = (255 - colors[1]);
       colors[2] = (255 - colors[2]);
@@ -96,17 +96,23 @@ function kernel (img, matrix) {
   // Cargar pixeles de la imagen
   img.loadPixels();
   // Transformar pixeles
-  for (let i = 0; i < img.width - matrix.length; i++) {
-    for (let j = 0; j < img.height - matrix[0].length; j++) {
+  for (let i = 0; i < img.width; i++) {
+    for (let j = 0; j < img.height; j++) {
+      let colors = img.get(i, j);
+      let acum = [0, 0, 0];
       for (let k = 0; k < matrix.length; k++) {
         for (let l = 0; l < matrix[0].length; l++) {
-          colors = img.get(i, j);
-          colors[0] = (255 - colors[0]);
-          colors[1] = (255 - colors[1]);
-          colors[2] = (255 - colors[2]);
-          img.set(i, j, colors);
+          let kernelValue = matrix[matrix.length-k-1][matrix[0].length-l-1];
+          let colors = img.get((i + k - ((img.width + 1) / 2) - 1) % img.width, (j + l - ((img.height - 1) / 2) + 1) % img.height);
+          acum[0] += colors[0] * kernelValue;
+          acum[1] += colors[1] * kernelValue;
+          acum[2] += colors[2] * kernelValue;
         }
       }
+      colors[0] = colors[0] * acum;
+      colors[1] = colors[1] * acum;
+      colors[2] = colors[2] * acum;
+      img.set(i, j, colors);
     }
   }
   // Actualizar pixeles de la imagen
