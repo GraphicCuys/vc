@@ -45,7 +45,7 @@ function setup(){
   // Imagen con transformación de bordes 30
   image(kernel(img8, [[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]]), size, size * 2, size, size);
   // Imagen con transformación Sharpen	
-  image(kernel(img9, [[0, -1, 0], [-1, 5, -1], [0, -1, 0]]), size, size * 3, size, size);
+  image(kernel(img9, [[0, -1, 0], [-1, 5, -1], [0, -1, 0]]), size,x size * 3, size, size);
   // Imagen con transformación Box blur
   image(kernel(img10, [[1/9.0, 1/9.0, 1/9.0], [1/9.0, 1/9.0, 1/9.0], [1/9.0, 1/9.0, 1/9.0]]), size, size * 4, size, size);
   // Imagen con transformación Gaussian blur 3 × 3
