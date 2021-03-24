@@ -22,4 +22,5 @@
 > 
 > [Mauricio Meza](/docs/members/mauricio-meza)
 > [Cesar Torres](/docs/members/cesar-torres)
+> [Luis Otálora](/docs/members/luis-otalora)
 > [NN](/docs/members/nn)
