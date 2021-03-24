@@ -10,11 +10,11 @@ function preload() {
 function setup() {
     // Create a canvas that's at least the size of the image.
     createCanvas(1000, 1000);
-    reSize(img, 100)
+    reSize(img, 130)
     effectGray(img, "gray")
     image(img, 0, 0);
     console.log(img)
-    toAscii(img, 100, 0)
+    toAscii(img, 150, 0)
 }
 const grayRamp =
     "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
