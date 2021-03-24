@@ -22,9 +22,16 @@ const rampLength = grayRamp.length;
 const getCharacterForGrayScale = grayScale =>
   grayRamp[Math.ceil(((rampLength - 1) * grayScale) / 255)];
 
+const littlegray = " .:-=+*#%@";
+ASCII_CHARS = ["@", "#", "$", "%", " ?", " * ", " + ", " ; ", " : ", " , ", " . "]
+const littlerampLength = littlegray.length;
+const othergetCharacter = grayScale =>{
+    return ASCII_CHARS[Math.floor(grayScale / 26)];
+}
+
 function toAscii(img,x,y) {
 
-    ASCII_CHARS = ["@", "#", "$", "%", " ?", " * ", " + ", " ; ", " : ", " , ", " . "]
+    
     strToPrint = ""
     img.loadPixels();
     console.log(img.width,img.height)
@@ -32,7 +39,7 @@ function toAscii(img,x,y) {
         for (let j = 0; j < img.width; j++) {
             // colors of the pixel
             colors = img.get(j,i);
-            strToPrint +=getCharacterForGrayScale(colors[0])
+            strToPrint +=othergetCharacter(colors[0])
         }
         strToPrint += "\n";
         if(i==1){
