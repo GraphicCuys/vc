@@ -1,5 +1,5 @@
 # Image and video processing
 
-> :P5 sketch=/docs/sketches/image.js, width=710, height=400
+> :P5 sketch=/docs/sketches/img-convolusion.js, width=580, height=750
 
 > :ToCPrevNext
