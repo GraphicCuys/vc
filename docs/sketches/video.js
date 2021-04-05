@@ -1,11 +1,13 @@
-let fingers;
-let fingers1;
+let vid;
+let vidw = 160;
+let vidh = 224;
+let n = 0
 function setup() {
-  createCanvas(160, 224);
+  createCanvas(280, 300);
   // specify multiple formats for different browsers
-  fingers = createVideo("/vc/docs/sketches/pacman.mp4");
-// fingers.loop();
-  fingers.hide();
+  vid = createVideo("/vc/docs/sketches/pacman.mp4");
+// vid.loop();
+  vid.hide();
   noStroke();
   fill(0);
 }
@@ -29,21 +31,49 @@ function gray(colors){
     return c 
   }
 function draw() {
+  eff = ["original","negative","gray-average","luma"]
+  drawmultiple(0,0,eff[n%eff.length],vid)
+  fill(0)
+  textSize(18)
+  text(eff[n%eff.length],170,60)
+  // drawmultiple(170,0,"gray",vid1)
+}
+
+function drawmultiple(xp,yp,filter,vid){
   background(255);
-  fingers.loadPixels();
-  for (var y = 0; y < height; y += 1) {
-    for (var x = 0; x < width; x += 1) {
-      var offset = ((y*width)+x)*4;
-      fill(negative([fingers.pixels[offset],
-        fingers.pixels[offset+1],
-        fingers.pixels[offset+2]]));
-      rect(x, y, 1, 1); 
+  vid.loadPixels();
+  for (var y = 0; y < vidh; y += 1) {
+    for (var x = 0; x < vidw; x += 1) {
+      var offset = ((y*vidw)+x)*4;
+      if(filter=="original"){
+        fill([vid.pixels[offset],
+          vid.pixels[offset+1],
+          vid.pixels[offset+2]]);
+      }
+      else if(filter == "negative"){
+        fill(negative([vid.pixels[offset],
+          vid.pixels[offset+1],
+          vid.pixels[offset+2]]));
+      }else if(filter = "luma"){
+        fill(gray([vid.pixels[offset],
+          vid.pixels[offset+1],
+          vid.pixels[offset+2]]));
+      }else{
+        fill(grayaverage([vid.pixels[offset],
+          vid.pixels[offset+1],
+          vid.pixels[offset+2]]));
+      }
+      rect(x+xp, y+yp, 1, 1); 
     }
   }
 }
-
-
 function mousePressed() {
-    fingers.loop(); // set the video to loop and start playing
-    fingers1.loop()
+    vid.loop(); // set the video to loop and start playing
+}
+function keyTyped() {
+  if (key === 'n') {
+    n+=1
+  }
+  // uncomment to prevent any default behavior
+  // return false;
 }
