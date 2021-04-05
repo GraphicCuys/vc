@@ -4,30 +4,23 @@ let width = 200;
 
 function preload() {
     // load assets 
-    img = loadImage('/vc/docs/sketches/black.png');
+    img = loadImage('/vc/docs/sketches/pika.jpg');
 }
 
 function setup() {
     // Create a canvas that's at least the size of the image.
     createCanvas(1000, 1000);
-    reSize(img, 130)
+    reSize(img, 150)
     effectGray(img, "gray")
     image(img, 0, 0);
     console.log(img)
-    toAscii(img, 150, 0)
+    toAscii(img, 160, 0)
 }
 const grayRamp =
     "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
 const rampLength = grayRamp.length;
 const getCharacterForGrayScale = grayScale =>
     grayRamp[Math.ceil(((rampLength - 1) * grayScale) / 255)];
-
-const littlegray = " .:-=+*#%@";
-ASCII_CHARS = ["@", "%", "#", "*", "+", "=", "-", " : ", " . ", " , ", " "]
-const littlerampLength = littlegray.length;
-const othergetCharacter = grayScale => {
-    return ASCII_CHARS[Math.floor(grayScale / 26)];
-}
 
 function toAscii(img, x, y) {
     strToPrint = ""
@@ -67,8 +60,10 @@ const drawAscii = (grayScales, width,x,y) => {
     }, "");
 
     strToPrint = ascii;
-    textSize(5)
     textFont("Courier")
+    textSize(4)
+    console.log("relation ",img.height/img.width," ",img.width/img.height)
+    textLeading(3)
     text(strToPrint, x, y);
 };
 function reSize(img, new_width) {
