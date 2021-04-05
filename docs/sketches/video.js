@@ -32,10 +32,11 @@ function gray(colors){
   }
 function draw() {
   eff = ["original","negative","gray-average","luma"]
+  names = ["Original","Negative","Gray-average","Luma"]
   drawmultiple(0,0,eff[n%eff.length],vid)
   fill(0)
   textSize(18)
-  text(eff[n%eff.length],170,60)
+  text(names[n%eff.length],170,60)
   // drawmultiple(170,0,"gray",vid1)
 }
 
