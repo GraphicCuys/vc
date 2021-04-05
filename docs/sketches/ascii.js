@@ -9,7 +9,7 @@ function preload() {
 
 function setup() {
     // Create a canvas that's at least the size of the image.
-    createCanvas(1000, 1000);
+    createCanvas(512, 512);
     reSize(img, 150)
     effectGray(img, "gray")
     image(img, 0, 0);

@@ -1,9 +1,14 @@
 
 const height = 300;
 
+let n = 0
+
 const kernel = [[0,0,0],
     [0,1,0],
     [0,0,0]];
+
+
+let names = ["Original","Edge","Blur","Sharpen"]
 
 const kernel2 = [ [ -1, -1, -1 ],
 [ -1,  8, -1 ],
@@ -18,22 +23,26 @@ const kernel4 = [[0,-1,0],
     [0,-1,0]];
 
 function setup(){
-
-    createCanvas(160, 224);
+    createCanvas(280, 300);
     baseVideo = createVideo("/vc/docs/sketches/pacman.mp4");
     baseVideo.hide();
 
 }
 
 function draw(){
-    imageConvolution(baseVideo, kernel4, 0, 0);
+    background(255);
+    eff = [kernel,kernel2,kernel3,kernel4]
+    imageConvolution(baseVideo, eff[n%eff.length], 0, 0);
+    fill(0)
+    textSize(18)
+    text(names[n%eff.length],170,60)
 }
 
 /*Image convolution with a matrix*/
 
 function imageConvolution(img, kernel, posx, posy){
 
-    let newImage = createImage(img.width, img.height); 
+    let newImage = createImage(160, 224); 
     img.loadPixels();
 
     newImage.loadPixels();
@@ -78,3 +87,11 @@ function imageConvolution(img, kernel, posx, posy){
 function mousePressed() {
     baseVideo.loop(); // set the video to loop and start playing
 }
+
+function keyTyped() {
+    if (key === 'n') {
+      n+=1
+    }
+    // uncomment to prevent any default behavior
+    // return false;
+  }
