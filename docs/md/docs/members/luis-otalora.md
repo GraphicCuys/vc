@@ -1,4 +1,4 @@
-# Cesar Torres
+# Luis Eduardo Otálora Cubides
 
 ## Bio
 
@@ -23,5 +23,15 @@ I have worked on different projects through creative spaces as hackatons that yo
 * Some writing and content creation ✍🏻
 
 ------------------------------------------------------------------
+
+## Optical illusion -  Lilac chaser illusion
+The lilac chaser is a visual illusion, also known as the Pac-Man illusion. It consists of 12 lilac (or pink, rose, or magenta), blurred discs arranged in a circle (like the numbers on a clock), around a small black, central cross on a grey background. One of the discs disappears briefly (for about 0.1 seconds), then the next (about 0.125 seconds later), and the next, and so on, in a clockwise direction. When one stares at the cross for about 5 seconds or so, one sees three different things:
+
+A gap running around the circle of lilac discs;
+A green disc running around the circle of lilac discs in place of the gap;
+The green disc running around on the grey background, with the lilac discs having disappeared in sequence.
+The chaser effect results from the phi phenomenon illusion, combined with an afterimage effect in which an opposite color, or complementary color – green – appears when each lilac spot disappears (if the discs were blue, one would see yellow), and color adaptation of the lilac discs.
+
+> :P5 lib1=https://unpkg.com/ml5@latest/dist/ml5.min.js, sketch=/docs/sketches/lilac.js, width=500, height=500
 
 > :ToCPrevNext
