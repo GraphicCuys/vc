@@ -4,3 +4,4 @@ dist
 #docs/assets/
 #*.html
 #docs/*.html
+.DS_Store
