@@ -26,6 +26,14 @@ Sing
 
 Program
 
+## Optical Illution
+
+The lilac hunter is a visual illusion that consists of placing 12 pink discs in a blurry circle, and in its center a small black cross on a gray background. The effect consists of making one of the discs disappear from time to time and rotating the disappearing disc clockwise, when you look carefully at the cross for a few seconds the disc that does not appear begins to turn green and the pink discs begin to disappear.
+
+[Lilac Chaser](https://en.wikipedia.org/wiki/Lilac_chaser)
+
+> :P5 lib1=https://unpkg.com/ml5@latest/dist/ml5.min.js, sketch=/docs/sketches/opticalCesar.js, width=512, height=512
+
 ------------------------------------------------------------------
 
 > :ToCPrevNext
