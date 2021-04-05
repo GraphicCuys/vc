@@ -3,6 +3,7 @@
 > :Collapse label=Workshops
 > 
 > [Imaging & Video](/docs/workshops/imaging)
+> [Video](/docs/workshops/video)
 > [Rendering](/docs/workshops/rendering)
 > [Algovis](/docs/workshops/algovis)
 > [Computer Graphics](/docs/workshops/cg)
