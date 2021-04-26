@@ -12,6 +12,7 @@
 > [Algovis](/docs/workshops/algovis)
 > [Computer Graphics](/docs/workshops/cg)
 > [HCI](/docs/workshops/hci)
+> [shaders](/docs/workshops/shaders)
 
 > :Collapse label=P5 Code Snippets
 > 
