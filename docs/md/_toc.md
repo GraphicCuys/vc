@@ -4,9 +4,14 @@
 > 
 > > :Collapse label=Imaging & Video
 > >
-> > [Basic - Kernel](/docs/workshops/imaging)
-> > [ASCII - Mosaic](/docs/workshops/ascii)
-> > [Video](/docs/workshops/video)
+> > >:Collapse label=Software
+> > > > [Image](/docs/workshops/imaging)
+> > > > [Mosaic](/docs/workshops/ascii)
+> > > > [Video](/docs/workshops/video)
+> >
+> > >:Collapse label=Hardware
+> > > > [Basic](/docs/workshops/imaging-hardware)
+> > > > [Kernel](/docs/workshops/kernel-hardware)
 >
 > [Rendering](/docs/workshops/rendering)
 > [Algovis](/docs/workshops/algovis)
