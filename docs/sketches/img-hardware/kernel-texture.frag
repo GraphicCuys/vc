@@ -1,8 +1,19 @@
-# Convolutional Matrix with Harwdware
+// texture.frag 
+precision mediump float;
 
-> :P5 sketch=/docs/sketches/img-hardware/3dImagePlanez-kernel.js, width=500, height=400
+uniform sampler2D texture;
 
-```glsl | kernel-texture.frag
+// interpolated color (same name as in vertex shader)
+varying vec4 vVertexColor;
+// interpolated texcoord (same name as in vertex shader)
+varying vec2 vTexCoord;
+
+uniform vec2 texOff;
+uniform float mask[9];
+
+vec2 tx[9];
+
+
 void main() {
 	//Get Coordinates for every neighbor pixel
 	tx[0] = vTexCoord.st + vec2(-texOff.s, -texOff.t); 
@@ -30,6 +41,3 @@ void main() {
 
   	gl_FragColor = conv;
 }
-```
-
-> :ToCPrevNext
