@@ -10,13 +10,13 @@ function preload(){
 function setup(){
     createCanvas(width,height, WEBGL);
     shader(myShader);
-    //perspective(PI/3, width/height, 0.1, 500);
-    //ortho(-width/2,width/2,height/2,-height/2);
+    perspective(PI/3, width/height, 0.1, 500);
+    ortho(-width/2,width/2,height/2,-height/2);
 }
 
 function draw(){
-    //orbitControl();
-    //createEasyCam();
+    orbitControl();
+    createEasyCam();
     beginShape();
         vertex(-width/4, -height/4, 0, 0);
         vertex(width/4, -height/4, 1, 0);
