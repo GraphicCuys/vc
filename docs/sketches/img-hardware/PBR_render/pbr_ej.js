@@ -13,6 +13,8 @@ function setup(){
     shader_texture = createGraphics(width, height, WEBGL);
     shader_texture.noStroke();
     
+    
+    noStroke();
     shader(my_shader);
 }
 
@@ -25,14 +27,21 @@ function draw(){
 
     shader_texture.shader(my_shader);
 
-    box(side);
-
+    push();
+        texture(img);
+        sphere(side);
+    pop();
+    
     beginShape();
         vertex(-side, -side, -side/2, 0, 0);
         vertex(side, -side, -side/2, 1, 0);
         vertex(side, side, -side/2, 1, 1);
         vertex(-side, side, -side/2, 0, 1);
     endShape();
+
+    specularMaterial(145)
+
+    //camera(0, 0, 0, 0, 0, 0, 0, 1, 0);
 
     orbitControl();
 }

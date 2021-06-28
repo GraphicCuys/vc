@@ -12,6 +12,7 @@
 > > > :Collapse label=Hardware
 > > > > [Basic](/docs/workshops/imaging-hardware)
 > > > > [Kernel](/docs/workshops/kernel-hardware)
+> > > > [Mosaic](/docs/workshops/photomosaic-hardware)
 > 
 > > :Collapse label=Rendering 
 > > > [Research PBR](/docs/workshops/pbr)
