@@ -85,7 +85,14 @@ Utilizando las normales a la hora de renderizar podemos calcular la proyección 
 El IBL genera una aproximacion bastante buenta de iluminacion indirecta para el rasterizado pero no perfecta, notese como el renderizado por ray tracing muestra la refexion de objetos en la escena mientras que el rasterizado no puede hacer esto
 
 ## Conclusiones
-Los shaders PBR nos permiten obtener una excelente simulación de materiales y objetos con características realistas basados en propiedades físicas comprobadas y utilizando una serie de inputs estandarizados, estos pueden generar resultados relativamente similares en renderizadores basados en ray tracing o rasterización permitiendo una aproximación muy buena a realismo en tiempo real con estos últimos. Esto ha generado que este tipo de materiales se vuelvan un estándar en la industria del CGI haciendo que casi todos las compañías que crean  motores de videojuegos, softwares de manipulación 3D y herramientas CAD modernas implementen Physically Based Rendering en sus productos.
+ - Los shaders PBR nos permiten obtener una excelente simulación de materiales y objetos con características realistas basadas en propiedades físicas comprobadas.
+ - Su configuración con una serie de inputs estandarizados ha logrado que se generan grandes bibliotecas de shaders realistas que se pueden utilizar en diferentes aplicaciones y que no requieren gran conocimiento técnico para modificarlos y crear nuevos materiales.
+ - Sus diferentes implementaciones pueden generar resultados relativamente similares en renderizadores basados en ray tracing o rasterización logrando una excelente aproximación al realismo en tiempo real con estos últimos. 
+ - Este tipo de materiales se han vuelto un estándar en la industria del CGI haciendo que casi todos las compañías que crean  motores de videojuegos, softwares de manipulación 3D y herramientas CAD modernas implementen Physically Based Rendering en sus productos.
+
+
+ - ¿Qué variaciones tienen las diferentes implementaciones de renderizadores PBR con diferentes BRDFs como Bling-Phong o Cook-Torrance?
+ - ¿Cómo se definen el resto de propiedades físicas y ópticas que afectan estas implementaciones como el fresnel y los materiales translúcidos y transparentes?
 
 ## Bibliografia
  - Basic Theory of Physically Based Rendering / Jeff Russell / Marmoset: 
