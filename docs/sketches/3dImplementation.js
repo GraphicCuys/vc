@@ -1,5 +1,6 @@
 const w = 500;
 const h = 400;
+const angle;
 var img;
 
 
@@ -10,7 +11,8 @@ function preload(){
 
 function setup() {
   	background(190, 255, 255);
-  	createCanvas(w, h, WEBGL);  
+  	createCanvas(w, h, WEBGL); 
+  	angle = 0; 
 }
 
 function draw() {
