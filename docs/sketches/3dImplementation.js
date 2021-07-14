@@ -1,6 +1,6 @@
 const w = 500;
 const h = 400;
-const angle;
+var angle = 0;
 var img;
 
 
