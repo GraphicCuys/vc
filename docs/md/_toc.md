@@ -12,6 +12,7 @@
 > > > :Collapse label=Hardware
 > > > > [Basic](/docs/workshops/imaging-hardware)
 > > > > [Kernel](/docs/workshops/kernel-hardware)
+> > > > [Video](/docs/workshops/video-hardware)
 > 
 > > :Collapse label=Rendering 
 > > > [Research PBR](/docs/workshops/pbr)
