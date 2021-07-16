@@ -4,8 +4,15 @@
 > 
 > > :Collapse label=Imaging & Video
 > >
-> > [Software](/docs/workshops/imaging)
-> > [Hardware](/docs/workshops/hardware)
+> > > :Collapse label=Software
+> > > > [Image](/docs/workshops/imaging)
+> > > > [Mosaic](/docs/workshops/ascii)
+> > > > [Video](/docs/workshops/video)
+> >
+> > > :Collapse label=Hardware
+> > > > [Basic](/docs/workshops/imaging-hardware)
+> > > > [Kernel](/docs/workshops/kernel-hardware)
+> > > > [Video](/docs/workshops/video-hardware)
 > 
 > [Rendering](/docs/workshops/rendering)
 > [Computer Graphics](/docs/workshops/cg)
