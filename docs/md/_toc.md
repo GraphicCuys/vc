@@ -2,9 +2,22 @@
 
 > :Collapse label=Workshops
 > 
-> [Imaging & Video](/docs/workshops/imaging)
-> [Video](/docs/workshops/video)
-> [Rendering](/docs/workshops/rendering)
+> > :Collapse label=Imaging & Video
+> >
+> > > :Collapse label=Software
+> > > > [Image](/docs/workshops/imaging)
+> > > > [Mosaic](/docs/workshops/ascii)
+> > > > [Video](/docs/workshops/video)
+> >
+> > > :Collapse label=Hardware
+> > > > [Basic](/docs/workshops/imaging-hardware)
+> > > > [Kernel](/docs/workshops/kernel-hardware)
+> > > > [Video](/docs/workshops/video-hardware)
+> 
+> > :Collapse label=Rendering 
+> > > [Research PBR](/docs/workshops/pbr)
+> > > [Implementation](/docs/workshops/rendering) 
+>
 > [Algovis](/docs/workshops/algovis)
 > [Computer Graphics](/docs/workshops/cg)
 > [HCI](/docs/workshops/hci)
