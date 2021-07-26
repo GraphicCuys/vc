@@ -1,8 +1,12 @@
 # Convolutional Matrix with Harwdware
 
-El concepto de shader es extensible a operaciones con filtros de convulsión sobre las imágenes en la que aplicamos cada matriz sobre los pixeles adyacentes del pixel analizado, aplicando la convolución y obteniendo los nuevos valores para cada canal de color de los mismos.
+El proceso de shaders se puede extender a operaciones con filtros de convulsión sobre las imágenes que utilizamos como texturas sobre el objeto tridimensional, para esto aplicamos cada matriz sobre los pixeles adyacentes del pixel analizado, aplicando la convolución y obteniendo los nuevos valores para cada canal de color de los mismos.
+
+La matriz de convolucion se pasa como un parametro en una variable uniforme en conjunto con la imagen y las coordenandas de la textura, de esta manera logramos colocar diferentes mascaras de convolucion al pasar otra matriz como parametro dentro de script en javasript.
 
 > :P5 sketch=/docs/sketches/img-hardware/3dImagePlanez-kernel.js, width=500, height=400
+
+En el archivo frag tomamos la matriz de convolucion y se la aplicamos a la matriz de texeles adyacentes para generar la modificacion de la textura.
 
 ```glsl | kernel-texture.frag
 void main() {
