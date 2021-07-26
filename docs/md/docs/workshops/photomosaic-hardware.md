@@ -16,8 +16,9 @@ que el rango por cada imagen sea entre 0 y 1, y así obtener la posición de las
 
 [symbolCoord = symbolCoord - imageCoord \ ([0,0.99...]\in \mathbb{R}))](:Formula)
 
-Por último  dividimos la coordenada de imagen entre la resolución para obtener el color del primer pixel por cada división y con base a el, realizar la comparación con las sub imagenes.
+Por último  dividimos la coordenada de imagen entre la resolución para obtener el color del primer pixel por cada división y con base a el realizar la comparación con las sub imagenes.
 
+[imageCoord = imageCoord * vec2(1.0) / vec2(resolution) \ ([0,0.99...]\in \mathbb{R}))](:Formula)
 
 ## ASCII
 
