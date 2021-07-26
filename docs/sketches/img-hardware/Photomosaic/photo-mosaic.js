@@ -1,9 +1,10 @@
 let img, my_shader;
 let width = 480;
 let height = 320;
-var images = [];
+let resolution = 50.0;
+let mosaic_images; 
 
-let links = [
+let mosaic_links = [
     "https://i.picsum.photos/id/315/200/300.jpg?hmac=C67WPcnxkaV_SPowHi-8nl3yoODZSBZqnoOdBObP5Ys",
     "https://i.picsum.photos/id/349/200/300.jpg?hmac=gEjHZbjuKtdD2GOM-qQtuaA95TCvDUs6iVvKraQ94nU",
     "https://i.picsum.photos/id/436/200/300.jpg?hmac=OuJRsPTZRaNZhIyVFbzDkMYMyORVpV86q5M8igEfM3Y",
@@ -48,13 +49,15 @@ let links = [
 
 function preload(){
     img = loadImage('/vc/docs/sketches/monte-fuji.jpg');
-    my_shader = loadShader('/vc/docs/sketches/img-hardware/Photomosaic/photo-mosaic.vert','/vc/docs/sketches/img-hardware/Photomosaic/photo-mosaic.frag');
+    my_shader = loadShader('/vc/docs/sketches/img-hardware/shader.vert','/vc/docs/sketches/img-hardware/Photomosaic/photo-mosaic.frag');
 
-    for(let i=0;i<10;i++){
-        images[i] = loadImage(links[i]);
+    mosaic_images = {}
+    for(let i = 0; i < 10; i++){
+        mosaic_images["i" + i]={
+            img : loadImage(mosaic_links[i]),
+            colorM: null
+        }
     }
-    console.log(img);
-    console.log(images);
 }
 
 function setup(){
@@ -64,15 +67,60 @@ function setup(){
     shader(my_shader);
     
     my_shader.setUniform('base_img', img);
-    my_shader.setUniform('images', [images[0]]);
-    my_shader.setUniform('resolution', 50.0);
+
+    getImagesPixelsAverage(mosaic_images);
+
+    let color;
+
+    // Set image and its average color
+    for(let i = 1; i < Object.keys(mosaic_images).length; i++){
+        color = mosaic_images['i'+i]['colorM'];
+        my_shader.setUniform('images_'+i, mosaic_images['i'+i]['img']);
+        my_shader.setUniform('averageColor_'+i, [red(color)/255,green(color)/255,blue(color)/255,1.0]);
+    }
+    my_shader.setUniform('resolution', resolution);
+}
+
+/* Get the average color for all images and save it*/
+function getImagesPixelsAverage(mosaic_images){
+    
+    Object.keys(mosaic_images).forEach(function(index) {
+        mosaic_images[index].colorM = colorPixelsAverage(mosaic_images[index].img) 
+    });
+}
+
+/* Get the mean of the pixels colors in a image*/
+function colorPixelsAverage(img){
+
+    let xpixels = img.width;
+    let ypixels = img.height;
+
+    let redM = 0;
+    let greenM = 0;
+    let blueM = 0;
+
+    img.loadPixels();
+
+    for(let i = 0; i < xpixels * ypixels * 4; i+=4){
+
+        redM += img.pixels[i];
+        greenM += img.pixels[i+1];
+        blueM += img.pixels[i+2];
+
+    }
+
+    redM = redM / (ypixels*xpixels);
+    greenM = greenM / (ypixels*xpixels);
+    blueM = blueM / (ypixels*xpixels);
+    
+    return color(redM,greenM,blueM);
 }
 
 function draw(){
 
     background(255);
 
-    let side = width/2
+    let side = width/2;
 
     beginShape();
         vertex(-side, -side, 0, 0, 0);
@@ -81,5 +129,4 @@ function draw(){
         vertex(-side, side, 0, 0, 1);
     endShape();
 
-    orbitControl();
 }
