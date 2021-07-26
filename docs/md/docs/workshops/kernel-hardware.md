@@ -1,5 +1,7 @@
 # Convolutional Matrix with Harwdware
 
+
+
 > :P5 sketch=/docs/sketches/img-hardware/3dImagePlanez-kernel.js, width=500, height=400
 
 ```glsl | kernel-texture.frag
