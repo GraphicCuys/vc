@@ -12,6 +12,7 @@
 > > > :Collapse label=Hardware
 > > > > [Basic](/docs/workshops/imaging-hardware)
 > > > > [Kernel](/docs/workshops/kernel-hardware)
+> > > > [Mosaic](/docs/workshops/photomosaic-hardware)
 > > > > [Video](/docs/workshops/video-hardware)
 > 
 > > :Collapse label=Rendering 
@@ -21,6 +22,7 @@
 > [Algovis](/docs/workshops/algovis)
 > [Computer Graphics](/docs/workshops/cg)
 > [HCI](/docs/workshops/hci)
+> [shaders](/docs/workshops/shaders)
 
 > :Collapse label=P5 Code Snippets
 > 
