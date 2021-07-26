@@ -1,6 +1,6 @@
 # Convolutional Matrix with Harwdware
 
-
+El concepto de shader es extensible a operaciones con filtros de convulsión sobre las imágenes en la que aplicamos cada matriz sobre los pixeles adyacentes del pixel analizado, aplicando la convolución y obteniendo los nuevos valores para cada canal de color de los mismos.
 
 > :P5 sketch=/docs/sketches/img-hardware/3dImagePlanez-kernel.js, width=500, height=400
 
