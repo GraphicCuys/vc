@@ -19,14 +19,18 @@ varying vec2 vTexCoord;
 void main() {
 
   vec2 symbolCoord = vTexCoord * resolution;
+  //[0, Resolution] (R)
+  vec2 imageCoord = floor(symbolCoord);
   //[0, Resolution] (Z)
-  symbolCoord = mod(symbolCoord, vec2(1.0));
+  symbolCoord = symbolCoord - imageCoord;
+  //[0, 0.99] (R)
+  imageCoord = imageCoord*vec2(1.0)/vec2(resolution);
   //[0, 0.99] (R)
 
-  vec4 color = texture2D(base_img, vTexCoord) * vVertexColor;
+  vec4 color = texture2D(base_img, imageCoord) * vVertexColor;
 
-  // Get gray color of image
-  float grayColor = (color.r*0.3 + color.g*0.59 + color.b*0.11);
+  // Get gray color of image by Luma
+  float grayColor = (color.r*0.2126 + color.g*0.7152 + color.b*0.0722);
 
   // Set symbol by gray color
   if(grayColor < 0.1){
