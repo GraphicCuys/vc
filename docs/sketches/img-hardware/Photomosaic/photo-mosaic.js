@@ -1,9 +1,10 @@
-let quadrille;
-let tilePerRow = 200;
-let baseImg;
-let images; 
+let img, my_shader;
+let width = 480;
+let height = 320;
+let resolution = 50.0;
+let mosaic_images; 
 
-let links = [
+let mosaic_links = [
     "https://i.picsum.photos/id/315/200/300.jpg?hmac=C67WPcnxkaV_SPowHi-8nl3yoODZSBZqnoOdBObP5Ys",
     "https://i.picsum.photos/id/349/200/300.jpg?hmac=gEjHZbjuKtdD2GOM-qQtuaA95TCvDUs6iVvKraQ94nU",
     "https://i.picsum.photos/id/436/200/300.jpg?hmac=OuJRsPTZRaNZhIyVFbzDkMYMyORVpV86q5M8igEfM3Y",
@@ -44,74 +45,47 @@ let links = [
     "https://i.picsum.photos/id/685/200/300.jpg?hmac=0R7Bu0AY8CbakSrvbQHtFb_swiFQbJqQe7bKpbV6viA",
     "https://i.picsum.photos/id/787/200/300.jpg?hmac=XItcL1ki66gQzP2FwRZjLbruiohUmaOYs9mmlDZe9KE",
     "https://i.picsum.photos/id/39/200/300.jpg?hmac=CcUiRU6-82MldMqtiF9shpKCbwzwkILEWuRi90JsADs"
-]   
-async function getlinks() {
-    for(let i =0;i<30;i++){
-        const response = await fetch('https://picsum.photos/200/300');
-        links.push(response.url)
-    }
-    // waits until the request completes...
-    console.log(links);
-  }
+]  
 
-function preload() {
-    /* Base image to do the photo mosaic */
-    baseImg = loadImage('/vc/docs/sketches/monte-fuji.jpg');
-    /* List of reference images to do the photo mosaic 
-       colorM = Average color per image
-    */
-    getlinks()
-    images = {}
-    for(let i=0;i<links.length;i++){
-        images["i"+i]={
-            img : loadImage(links[i]),
+function preload(){
+    img = loadImage('/vc/docs/sketches/monte-fuji.jpg');
+    my_shader = loadShader('/vc/docs/sketches/img-hardware/shader.vert','/vc/docs/sketches/img-hardware/Photomosaic/photo-mosaic.frag');
+
+    mosaic_images = {}
+    for(let i = 0; i < 10; i++){
+        mosaic_images["i" + i]={
+            img : loadImage(mosaic_links[i]),
             colorM: null
         }
     }
-    console.log(images);
-    // images = {
-    //     // i1: {
-    //     //     img : loadImage('/vc/docs/sketches/monte-fuji.jpg'),
-    //     //     colorM: null
-    //     // }, 
-    //     // i2: {
-    //     //     img : loadImage('/vc/docs/sketches/animal.jpg'),
-    //     //     colorM: null
-    //     // }, 
-    //     // i3: {
-    //     //     img : loadImage('/vc/docs/sketches/leaf.jpg'),
-    //     //     colorM: null
-    //     // }, 
-    //     // i4:{
-    //     //     img : loadImage('/vc/docs/sketches/mahakala.jpg'),
-    //     //     colorM: null
-    //     // }, 
-    //     // i5:{
-    //     //     img : loadImage('/vc/docs/sketches/mario.jpg'),
-    //     //     colorM: null
-    //     // },
-    //     i6:{
-    //         img : loadImage('https://i.picsum.photos/id/497/200/300.jpg?hmac=IqTAOsl408FW-5QME1woScOoZJvq246UqZGGR9UkkkY'),
-    //         colorM: null
-    //     },
-    // }
 }
 
-function setup() {
-  createCanvas(800, 1200);
-  quadrille = createQuadrille(tilePerRow, baseImg);; 
-  image(baseImg, 0, 600, 800, 600);
-  getImagesPixelsAverage(images);
+function setup(){
+    createCanvas(width, height, WEBGL); 
+    textureMode(NORMAL);
+    noStroke();
+    shader(my_shader);
+    
+    my_shader.setUniform('base_img', img);
 
-  listOfImages(quadrille, images);
-  console.log(quadrille.width+"->"+quadrille.height);
+    getImagesPixelsAverage(mosaic_images);
+
+    let color;
+
+    // Set image and its average color
+    for(let i = 1; i < Object.keys(mosaic_images).length; i++){
+        color = mosaic_images['i'+i]['colorM'];
+        my_shader.setUniform('images_'+i, mosaic_images['i'+i]['img']);
+        my_shader.setUniform('averageColor_'+i, [red(color)/255,green(color)/255,blue(color)/255,1.0]);
+    }
+    my_shader.setUniform('resolution', resolution);
 }
 
 /* Get the average color for all images and save it*/
-function getImagesPixelsAverage(images){
+function getImagesPixelsAverage(mosaic_images){
     
-    Object.keys(images).forEach(function(index) {
-        images[index].colorM = colorPixelsAverage(images[index].img) 
+    Object.keys(mosaic_images).forEach(function(index) {
+        mosaic_images[index].colorM = colorPixelsAverage(mosaic_images[index].img) 
     });
 }
 
@@ -142,47 +116,17 @@ function colorPixelsAverage(img){
     return color(redM,greenM,blueM);
 }
 
-/* Return a list with the corresponding images for each tile*/
+function draw(){
 
-function listOfImages(quadrille, images){
-    tilesx = quadrille.width;
-    tilesy = quadrille.height;
-    xpixels = 800;
-    ypixels = 600;
+    background(255);
 
-    subImageWidth = xpixels/tilesx;
-    subImageHeight = ypixels/tilesy;
+    let side = width/2;
 
-    let imagesList = [];
-    for(let j = 0; j < tilesy; j++){
-        for(let i = 0; i < tilesx; i++){
-            imagesList.push(bestAproximation(quadrille.read(j,i), images));
-            image(bestAproximation(quadrille.read(j,i), images),
-                                i*subImageWidth,j*subImageHeight,
-                                subImageWidth,subImageHeight);
-        }
-    }
-    return imagesList;
-}
+    beginShape();
+        vertex(-side, -side, 0, 0, 0);
+        vertex(side, -side, 0, 1, 0);
+        vertex(side, side, 0, 1, 1);
+        vertex(-side, side, 0, 0, 1);
+    endShape();
 
-/* Calculate the distance on colors and return the image with the best distance */
-
-function bestAproximation(colorTile,images){
-
-    let bestDistance = 765;
-    let colorImage, distance, bestImageIndex; 
-    Object.keys(images).forEach(function(index) {
-        colorImage = images[index].colorM; ;
-
-        distance = dist(colorTile[0], colorTile[1], colorTile[2], 
-            red(colorImage),green(colorImage),blue(colorImage));
-
-        if(distance < bestDistance){
-            bestDistance = distance;
-            bestImageIndex = index;
-        }
-        
-    });
-
-    return images[bestImageIndex].img;
 }
