@@ -21,8 +21,7 @@ varying vec2 vTexCoord;
 vec4 imagesColorMean[10];
 
 float colorDistance(vec4 color1, vec4 color2){
-  float colorsDistance = distance(color1, color2);
-  return colorsDistance;
+  return distance(color1, color2);
 }
 
 vec4 bestColorAproximation(vec4 texColor, vec2 symbolCoord){
@@ -78,15 +77,15 @@ vec4 bestColorAproximation(vec4 texColor, vec2 symbolCoord){
 void main() {
 
   vec2 symbolCoord = vTexCoord * resolution;
+  //[0, Resolution] (R)
+  vec2 imageCoord = floor(symbolCoord);
   //[0, Resolution] (Z)
-  symbolCoord = mod(symbolCoord, vec2(1.0));
+  symbolCoord = symbolCoord - imageCoord;
+  //[0, 0.99] (R)
+  imageCoord = imageCoord*vec2(1.0)/vec2(resolution);
   //[0, 0.99] (R)
 
-  //Example to set the middle part of the image
-  //vec2 mid = vec2((vTexCoord.x + 1.0) * 0.33, vTexCoord.y); 
-  //getImagesColor();
-
-  vec4 color = texture2D(base_img, vTexCoord) * vVertexColor;
+  vec4 color = texture2D(base_img, imageCoord) * vVertexColor;
 
   gl_FragColor = bestColorAproximation(color, symbolCoord);
 }

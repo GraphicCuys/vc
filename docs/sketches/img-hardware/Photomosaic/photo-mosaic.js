@@ -1,7 +1,7 @@
 let img, my_shader;
 let width = 480;
 let height = 320;
-let resolution = 50.0;
+let resolution = 100.0;
 let mosaic_images; 
 
 let mosaic_links = [
